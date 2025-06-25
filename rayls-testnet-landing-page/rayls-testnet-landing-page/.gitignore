@@ -1,0 +1,16 @@
+Ignore environment files
+
+.env
+.env.*
+
+
+Build output
+
+/dist
+/build
+
+macOS & Linux
+
+.DS_Store
+.idea
+.vscode

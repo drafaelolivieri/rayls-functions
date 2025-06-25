@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rayls • Waitlist</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --yellow:#ECFB3E; --black:#111111; --purple:#c7baf4;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Rethink Sans',sans-serif}
+body{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(to bottom,var(--yellow) 0%,var(--purple) 100%);
+  color:var(--black);
+}
+.wrap{width:90%;max-width:560px}
+.logo{width:140px;height:40px;margin:0 auto 2rem;display:flex;align-items:center;justify-content:center;font-weight:700;border-radius:4px}
+.logo span{font-size:2.2rem}
+.xlogo{
+  width:24px;height:24px;
+  margin-left:.25rem;
+}
+h2{font-size:2rem;font-weight:600;margin-bottom:.25rem}
+h3{font-size:1.75rem;font-weight:600;margin-bottom:2.5rem}
+.card{
+  border:2px solid var(--black);
+  border-radius:14px;
+  padding:2.25rem 1.5rem;
+  font-size:1.65rem;
+  line-height:1.3;
+}
+.shareBtn{
+  margin-top:1.5rem;
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--black);color:white;
+  padding:.75rem 1.5rem;border-radius:14px;text-decoration:none
+}
+.shareBtn:active{transform:scale(.97)}
+.shareBtn svg{width:18px;height:18px;fill:var(--yellow)}
+@media(max-width:480px){h2{font-size:1.6rem}h3{font-size:1.45rem}.card{font-size:1.35rem}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="logo" src="images/Rayls_Logo_Black.png" alt="Rayls Logo" />
+
+    <h2>You’re in the waitlist</h2>
+    <h3>Verify your email to find out your position</h3>
+
+    <div class="card">
+      Refer your friends to move up in line
+      <br>
+      <a id="share" class="shareBtn" href="#" target="_blank">
+        Share on
+        <img class="xlogo" src="images/X_icon_2.png" alt="X Icon">
+      </a>
+    </div>
+  </div>
+
+<script>
+const pos = localStorage.getItem('raylsPos') || '----';
+const ref = localStorage.getItem('raylsRef') || window.location.href;
+
+//document.getElementById('pos').textContent = `#${pos}`;
+document.getElementById('share').href =
+  `https://twitter.com/intent/tweet?text=I just joined the Rayls testnet waitlist – blockchain for banks.%0A%0AGrab your spot here:%20${encodeURIComponent(ref)}`;
+</script>
+</body>
+</html>
