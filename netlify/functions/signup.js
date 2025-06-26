@@ -40,16 +40,16 @@ exports.handler = async (event) => {
     };
   }
 
-  const { name, company, email, phone } = body;
+  const { email, country, bank, wallet } = body;
 
   // ===== VALIDATE REQUIRED FIELDS =====
-  if (!name || !company || !email || !phone) {
+  if (!email || !country || !bank || !wallet) {
     return {
       statusCode: 400,
       headers: corsHeaders,
       body: JSON.stringify({ 
         error: 'Missing required fields',
-        required: ['name', 'company', 'email', 'phone']
+        required: ['email', 'country', 'bank', 'wallet']
       })
     };
   }
@@ -61,6 +61,16 @@ exports.handler = async (event) => {
       statusCode: 400,
       headers: corsHeaders,
       body: JSON.stringify({ error: 'Invalid email format' })
+    };
+  }
+
+  // ===== VALIDATE ETHEREUM ADDRESS =====
+  const ethRegex = /^0x[a-fA-F0-9]{40}$/;
+  if (!ethRegex.test(wallet)) {
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Invalid Ethereum address' })
     };
   }
 
@@ -79,9 +89,9 @@ exports.handler = async (event) => {
         api_key: process.env.GETWAITLIST_API_KEY,
         referral_link: event.headers.referer || event.headers.origin || '',
         metadata: {
-          name: name,
-          company: company,
-          phone: phone,
+          country: country,
+          bank: bank,
+          wallet: wallet,
           timestamp: new Date().toISOString(),
           user_agent: event.headers['user-agent'] || ''
         }
